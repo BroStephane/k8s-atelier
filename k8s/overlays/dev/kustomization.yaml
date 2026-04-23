@@ -4,3 +4,11 @@ resources:
   - ../../base
   - configmap.yaml
 namePrefix: dev-
+patches:
+  - target:
+      kind: Service
+      name: node-app-service
+    patch: |-
+      - op: replace
+        path: /spec/ports/0/nodePort
+        value: 30081
