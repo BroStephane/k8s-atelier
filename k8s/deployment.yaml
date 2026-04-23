@@ -13,28 +13,27 @@ spec:
         app: node-app
     spec:
       containers:
-      - name: node-app
-        image: mon-app-node:v1
-        imagePullPolicy: Never # Si tu utilises Minikube/Kind localement
-        ports:
-        - containerPort: 3000
-        # Étape 4 : Injection des variables d'environnement 
-        env:
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: DB_USER
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: app-secrets
-              key: DB_PASSWORD
-        # Étape 3 : Montage du volume 
-        volumeMounts:
-        - name: config-volume
-          mountPath: /app/config/
+        - name: node-app
+          image: broboosted/mon-app-node:v1
+          ports:
+            - containerPort: 3000
+          # Étape 4 : Injection des variables d'environnement
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: DB_PASSWORD
+          # Étape 3 : Montage du volume
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config/
       volumes:
-      - name: config-volume
-        configMap:
-          name: app-config
+        - name: config-volume
+          configMap:
+            name: app-config
