@@ -5,5 +5,5 @@ metadata:
 data:
   config.json: |
     {
-      "message": "Bonjour depuis Kubernetes !"
+      "message": "Bienvenue en DEV !"
     }
